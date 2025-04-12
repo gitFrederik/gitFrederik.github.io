@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Personal Website</title>
+  <!-- Basic reset and minimal styling -->
+  <style>
+    /* Overall page styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #0f0f0f;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Container for the two main panels */
+    .container {
+      display: flex;
+      flex-direction: row;
+      width: 80%;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    /* Left panel (name and location) */
+    .left-panel {
+      flex: 1;
+      margin-right: 2rem;
+    }
+    .brand {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .brand-arrow {
+      color: #999999;
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+    .location {
+      color: #aaaaaa;
+      margin-bottom: 2rem;
+    }
+    .social-links a {
+      margin-right: 1rem;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    /* Right panel (about, résumé, contact) */
+    .right-panel {
+      flex: 2;
+      line-height: 1.6;
+    }
+    h2 {
+      margin-bottom: 0.5rem;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .section p {
+      color: #cccccc;
+    }
+
+    /* Optional: Hover effect on links */
+    .social-links a:hover {
+      color: #cccccc;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left panel -->
+    <div class="left-panel">
+      <div class="brand">
+        <span class="brand-arrow">&gt;</span> YourName
+      </div>
+      <div class="location">City, Country</div>
+      <!-- Social links / icons -->
+      <div class="social-links">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Email</a>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="right-panel">
+      <!-- About section -->
+      <div class="section">
+        <h2>About me</h2>
+        <p>
+          I am a Computer Science student. I have been studying at XYZ University since 20XX,
+          and my research interests include ...
+        </p>
+      </div>
+
+      <!-- Résumé section -->
+      <div class="section">
+        <h2>Résumé</h2>
+        <p>
+          Briefly describe your relevant experience, internships, or research highlights here.
+          You can link to your detailed résumé or CV as needed.
+        </p>
+      </div>
+
+      <!-- Contact section -->
+      <div class="section">
+        <h2>Contact</h2>
+        <p>
+          Personal email: yourname@example.com <br />
+          University email: yourname@university.edu
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
