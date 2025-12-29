@@ -46,13 +46,16 @@ const content = {
       name: "Data-Driven Simulation Configurations",
       featured: false,
       problem: "Physics-enhanced simulations at TUM needed faster algorithm tuning for high-performance particle simulations.",
-      solution: "Built a machine learning pipeline taked simulation data and uses PCA, K-means and other meachanisms to find the best algorithm.",
+      solution: "Built a machine learning pipeline which leveragessimulation data and uses PCA, K-means and more to find the best algorithm configuration.",
       results: "Delivered a 16% runtime reduction over legacy approaches on a high-performance cluster (coolMuc4) while enabling explainable decision-making.",
       tech: ["C++", "Python", "Pandas", "Random Forests"],
-      links: {
-        github: "https://github.com/gitFrederik",
-        demo: "#projects"
-      }
+      links: [
+        { label: "GitHub", url: "https://github.com/gitFrederik" },
+        {
+          label: "Read Thesis",
+          url: "https://mediatum.ub.tum.de/doc/1797259/ffeqiqdcqqj2i6yq5rpd16q4k.pdf#:~:text=This%20thesis%20aims%20to%20implement,are%20expected%20to%20perform%20well."
+        }
+      ]
     },
     {
       name: "Molecular Dynamics Challenge",
@@ -61,10 +64,7 @@ const content = {
       solution: "Led a 3-person team building an OpenMP-accelerated framework with low-level optimizations and profiling.",
       results: "Achieved the best overall performance, posting a 60% speedup versus the next-best team.",
       tech: ["C++", "OpenMP", "Valgrind"],
-      links: {
-        github: "https://github.com/gitFrederik",
-        demo: "#projects"
-      }
+      links: [{ label: "GitHub", url: "https://github.com/gitFrederik" }]
     },
     {
       name: "HackaTUM 24 Mobility Platform",
@@ -73,10 +73,7 @@ const content = {
       solution: "Delivered a TypeScript + React prototype with Go services powering booking, telemetry, and admin flows.",
       results: "Enabled production-ready system design under hackathon constraints with strong UX handoff.",
       tech: ["React", "TypeScript", "Go"],
-      links: {
-        github: "https://github.com/gitFrederik",
-        demo: "#projects"
-      }
+      links: [{ label: "GitHub", url: "https://github.com/gitFrederik" }]
     }
   ],
   skills: {
@@ -102,7 +99,7 @@ const content = {
       school: "University of California, Davis",
       degree: "Exchange Semester (GPA 3.92/4.0)",
       range: "Sep 2023 – Jan 2024",
-      coursework: ["Computer Science", "Economics", "Policy"]
+      coursework: ["Computer Science", "Economics", "Political Science"]
     }
   ],
   highlights: [
@@ -201,9 +198,14 @@ function hydrateProjects() {
     `;
     const links = document.createElement("div");
     links.className = "hero-links";
-    links.innerHTML = `
-      <a href="${project.links.github}" target="_blank" rel="noreferrer">GitHub ↗</a>
-    `;
+    project.links.forEach((link) => {
+      const anchor = document.createElement("a");
+      anchor.href = link.url;
+      anchor.target = "_blank";
+      anchor.rel = "noreferrer";
+      anchor.textContent = link.label + " ↗";
+      links.appendChild(anchor);
+    });
     card.appendChild(renderStack(project.tech));
     card.appendChild(links);
     wrapper.appendChild(card);
