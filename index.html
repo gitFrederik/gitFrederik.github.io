@@ -2,147 +2,125 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Frederik Willemsen</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Basic reset and minimal styling -->
-  <style>
-    
-    /* Overall page styling */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      background-color: #0f0f0f;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Container for the two main panels */
-    .container {
-      display: flex;
-      flex-direction: row;
-      width: 80%;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    /* Left panel (name and location) */
-    .left-panel {
-      flex: 1;
-      margin-right: 2rem;
-    }
-    .brand {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    .brand-arrow {
-      color: #999999;
-      font-size: 1.5rem;
-      margin-right: 0.5rem;
-    }
-    .location {
-      color: #aaaaaa;
-      margin-bottom: 2rem;
-    }
-    .social-links a {
-      margin-right: 1rem;
-      color: #ffffff;
-      text-decoration: none;
-    }
-
-    /* Right panel (about, résumé, contact) */
-    .right-panel {
-      flex: 2;
-      line-height: 1.6;
-    }
-    h2 {
-      margin-bottom: 0.5rem;
-    }
-    .section {
-      margin-bottom: 2rem;
-    }
-    .section p {
-      color: #cccccc;
-    }
-    .section ul {
-      color: #cccccc;
-      margin-left: 1.5rem;
-      line-height: 1.6;
-    }
-    .section li {
-      margin-bottom: 0.3rem;
-    }
-
-    /* Optional: Hover effect on links */
-    .social-links a:hover {
-      color: #cccccc;
-      text-decoration: underline;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frederik Willemsen · Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="container">
-    <!-- Left panel -->
-    <div class="left-panel">
-      <div class="brand">
-        <span class="brand-arrow">&gt;</span> Frederik Willemsen 
-      </div>
-      <div class="location">Munich, Germany</div>
-      <!-- Social links / icons -->
-      <div class="social-links">
-        <a href="https://github.com/gitFrederik" target="_blank" aria-label="GitHub"><i class="fab fa-github fa-2x"></i></a>
-        <a href="https://www.linkedin.com/in/frederik-willemsen-72013821b" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a>
-        <a href="https://www.instagram.com/frederikwllmsn" target="_blank" aria-label="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
-      </div>
-      <img src="/images/profilbild.jpg" style="width: 100%; max-width: 200px; border-radius: 8px; margin-top: 1rem;" />
+<body data-theme="dark">
+  <header class="site-header" role="banner">
+    <div class="branding">
+      <a class="logo" href="#hero">FW</a>
+      <button id="theme-toggle" type="button" class="icon-button" aria-label="Toggle dark mode">
+        <span class="icon">☾</span>
+      </button>
     </div>
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#experience">Experience</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#skills">Skills</a></li>
+        <li><a class="nav-link" href="#education">Education</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Right panel -->
-    <div class="right-panel">
-      <!-- About section -->
-      <div class="section">
-        <h2>About me</h2>
-        <p>
-          I completed my Bachelor's degree in Computer Science at the Technical University of Munich (2021–2025) and I am now enrolled in the
-          Master's program in Computer Science (2025–2027) with a focus on Machine Learning, Software Engineering.<br />
-          <br />
-
-          I also spent an exchange semester at the University of California Davis (September 2023 – January 2024), where I broadened my perspective through
-          advanced coursework in Computer Science, Economics (my minor), and Political Science. That experience sharpened my ability to
-          connect technical work with global economic and policy contexts.<br />
-
-          The common theme through my studies is using AI-driven methods to tackle complex real-world problems, and I am passionate
-          about translating research ideas into reliable software solutions.
-        </p>
+  <main>
+    <section id="hero" class="hero" tabindex="-1">
+      <div class="hero-content">
+        <p class="eyebrow" id="hero-location"></p>
+        <h1 id="hero-name"></h1>
+        <p class="headline" id="hero-headline"></p>
+        <p class="value" id="hero-value"></p>
+        <div class="hero-ctas">
+          <a id="primary-cta" class="btn primary" href="#projects">View Projects</a>
+          <a id="secondary-cta" class="btn secondary" href="#contact">Contact</a>
+        </div>
+        <div class="hero-links" id="hero-links" aria-label="Social links"></div>
       </div>
-
-      <!-- Professional experience section -->
-      <div class="section">
-        <h2>Professional Experience</h2>
-        <ul>
-          <li><strong>Check24</strong> (Aug 2025 – Oct 2025): Software engineering intern working on full-stack features and an MCP Server implementation.</li>
-          <li><strong>Deloitte Consulting</strong> (Oct 2025 – Feb 2026): Technology consulting intern supporting data-intensive client projects and automation initiatives.</li>
-        </ul>
-        <p>
-          These roles strengthened my ability to move between research experimentation, production-grade code, and clear communication with interdisciplinary teams.
-        </p>
+      <div class="hero-visual">
+        <div class="avatar-frame">
+          <img src="images/profilbild.jpg" alt="Portrait of Frederik Willemsen" />
+        </div>
       </div>
+    </section>
 
-      <!-- Education section -->
-      <div class="section">
+    <section id="about" class="section" tabindex="-1">
+      <div class="section-heading">
+        <p>01</p>
+        <h2>About</h2>
+      </div>
+      <div class="section-body">
+        <p id="about-bio"></p>
+        <div class="chips" id="interest-chips" aria-label="Interests"></div>
+      </div>
+    </section>
+
+    <section id="experience" class="section" tabindex="-1">
+      <div class="section-heading">
+        <p>02</p>
+        <h2>Experience</h2>
+      </div>
+      <div class="section-body cards" id="experience-list"></div>
+    </section>
+
+    <section id="projects" class="section" tabindex="-1">
+      <div class="section-heading">
+        <p>03</p>
+        <h2>Projects</h2>
+      </div>
+      <div class="section-body cards" id="project-list"></div>
+    </section>
+
+    <section id="skills" class="section" tabindex="-1">
+      <div class="section-heading">
+        <p>04</p>
+        <h2>Skills</h2>
+      </div>
+      <div class="section-body skills-grid" id="skills-grid"></div>
+    </section>
+
+    <section id="education" class="section" tabindex="-1">
+      <div class="section-heading">
+        <p>05</p>
         <h2>Education</h2>
-        <ul>
-          <li><strong>M.Sc. Computer Science</strong>, Technical University of Munich (2025–2027)</li>
-          <li><strong>B.Sc. Computer Science</strong>, Technical University of Munich (2021–2025)</li>
-          <li><strong>Exchange Program</strong> in Computer Science, University of California Davis (Sep 2023 – Jan 2024)</li>
-        </ul>
       </div>
-    </div>
+      <div class="section-body cards" id="education-list"></div>
+    </section>
+
+    <section id="highlights" class="section" tabindex="-1">
+      <div class="section-heading">
+        <p>06</p>
+        <h2>Resume Highlights</h2>
+      </div>
+      <div class="section-body">
+        <ul id="highlight-list" class="highlights"></ul>
+      </div>
+    </section>
+
+    <section id="contact" class="section" tabindex="-1">
+      <div class="section-heading">
+        <p>07</p>
+        <h2>Contact</h2>
+      </div>
+      <div class="section-body contact">
+        <div>
+          <p>Modern channels only — drop a note via LinkedIn or GitHub and I'll reply within a day.</p>
+          <p>No back-end form collection here, keeping things privacy-first.</p>
+          <div class="hero-links" id="contact-links" aria-label="Contact links"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© <span id="year"></span> Frederik Willemsen — Built with semantic HTML & vanilla JS.</small>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
