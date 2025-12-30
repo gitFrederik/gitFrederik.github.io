@@ -450,6 +450,17 @@ function initNavHighlight() {
       setNavPill(active);
     }
   });
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.forEach((l) => l.classList.remove("active"));
+      link.classList.add("active");
+      setNavPill(link);
+      if (navSwitcher) {
+        navSwitcher.classList.remove("nav-switcher--hidden");
+      }
+    });
+  });
 }
 
 function initSmoothScroll() {
