@@ -283,7 +283,8 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  padding: 0.45rem 0.65rem;
+  padding: 0.6rem 0.9rem;
+  min-height: 60px;
   border-radius: 999px;
   border: 1px solid
     color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 16%), transparent);
@@ -312,9 +313,9 @@ textarea:focus-visible {
 .site-nav .nav-switcher::after {
   content: "";
   position: absolute;
-  top: 4px;
-  left: 4px;
-  height: calc(100% - 8px);
+  top: 6px;
+  left: 6px;
+  height: calc(100% - 12px);
   width: var(--nav-pill-width, 96px);
   translate: var(--nav-pill-x, 0px) 0;
   border-radius: 999px;
@@ -349,7 +350,7 @@ textarea:focus-visible {
 
 .nav-link {
   text-decoration: none;
-  padding: 0.35rem 0.75rem;
+  padding: 0.4rem 0.9rem;
   border-radius: 999px;
   font-weight: 500;
   color: color-mix(in srgb, var(--c-content) 75%, transparent);
