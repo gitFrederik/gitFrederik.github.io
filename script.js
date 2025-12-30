@@ -146,7 +146,7 @@ function hydrateLinks(containerId, links) {
     const anchor = document.createElement("a");
     anchor.href = link.url;
     anchor.target = "_blank";
-    anchor.rel = "noreferrer";
+    anchor.rel = "noopener noreferrer";
     anchor.textContent = link.label;
     anchor.setAttribute("aria-label", link.label);
     anchor.insertAdjacentHTML("beforeend", '<span aria-hidden="true">↗</span>');
@@ -202,7 +202,7 @@ function hydrateProjects() {
       const anchor = document.createElement("a");
       anchor.href = link.url;
       anchor.target = "_blank";
-      anchor.rel = "noreferrer";
+      anchor.rel = "noopener noreferrer";
       anchor.textContent = link.label + " ↗";
       links.appendChild(anchor);
     });
