@@ -8,6 +8,8 @@
   --accent-strong: #7df19a;
   --border: rgba(255, 255, 255, 0.08);
   --shadow: 0 15px 35px rgba(2, 6, 23, 0.55);
+  --glow-primary: rgba(88, 213, 255, 0.22);
+  --glow-secondary: rgba(125, 241, 154, 0.2);
 }
 
 body[data-theme="light"] {
@@ -20,6 +22,8 @@ body[data-theme="light"] {
   --accent-strong: #00aa72;
   --border: rgba(12, 26, 44, 0.08);
   --shadow: 0 15px 35px rgba(15, 20, 35, 0.12);
+  --glow-primary: rgba(0, 89, 255, 0.16);
+  --glow-secondary: rgba(0, 170, 114, 0.16);
 }
 
 * {
@@ -28,15 +32,69 @@ body[data-theme="light"] {
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
+  position: relative;
   margin: 0;
   font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: radial-gradient(circle at top, rgba(88, 213, 255, 0.08), transparent 45%), var(--bg);
   color: var(--text);
   line-height: 1.6;
   transition: background 0.4s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  background: radial-gradient(circle at 20% 20%, var(--glow-primary), transparent 55%),
+    radial-gradient(circle at 80% 30%, var(--glow-secondary), transparent 50%);
+  opacity: 0.55;
+  filter: blur(0px);
+  animation: ambientFade 16s ease-in-out infinite;
+  pointer-events: none;
+}
+
+body::after {
+  background: radial-gradient(circle at 65% 70%, var(--glow-primary), transparent 55%),
+    radial-gradient(circle at 30% 80%, var(--glow-secondary), transparent 50%);
+  opacity: 0.45;
+  animation: ambientDrift 22s ease-in-out infinite;
+}
+
+@keyframes ambientFade {
+  0% {
+    opacity: 0.35;
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate3d(2%, 1%, 0) scale(1.05);
+  }
+  100% {
+    opacity: 0.35;
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+}
+
+@keyframes ambientDrift {
+  0% {
+    opacity: 0.3;
+    transform: translate3d(3%, 2%, 0) scale(1.05);
+  }
+  50% {
+    opacity: 0.65;
+    transform: translate3d(-3%, -2%, 0) scale(1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: translate3d(3%, 2%, 0) scale(1.05);
+  }
 }
 
 a {
@@ -252,6 +310,50 @@ main {
 
 .section-body {
   margin-top: 1.5rem;
+}
+
+#about .section-body {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: linear-gradient(140deg, rgba(88, 213, 255, 0.12), rgba(15, 23, 38, 0.2)),
+    var(--surface);
+  box-shadow: 0 22px 50px rgba(2, 8, 20, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+#about .section-body::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 20% 20%, rgba(125, 241, 154, 0.18), transparent 60%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+#about .section-body > * {
+  position: relative;
+  z-index: 1;
+}
+
+#about #about-bio {
+  font-size: 1.05rem;
+  max-width: 60ch;
+}
+
+#about .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+#about .chips span {
+  background: rgba(88, 213, 255, 0.12);
+  color: var(--text);
+  border-color: rgba(88, 213, 255, 0.3);
 }
 
 .cards {
