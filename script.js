@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
   hydrateEducation();
   hydrateHighlights();
   hydrateLinks("contact-links", content.hero.social);
-  initThemeToggle();
+  initThemeSwitcher();
   initNavHighlight();
   initSmoothScroll();
   initHoverGlow();
@@ -322,19 +322,24 @@ function renderStack(items) {
   return stack;
 }
 
-function initThemeToggle() {
+function initThemeSwitcher() {
+  const switcher = document.querySelector(".switcher");
+  if (!switcher) return;
   const body = document.body;
-  const toggle = document.getElementById("theme-toggle");
+  const radios = switcher.querySelectorAll('input[type="radio"]');
   const stored = localStorage.getItem("theme");
-  if (stored) {
-    body.dataset.theme = stored;
-  }
-  updateThemeIcon(toggle, body.dataset.theme);
-  toggle.addEventListener("click", () => {
-    const nextTheme = body.dataset.theme === "dark" ? "light" : "dark";
-    body.dataset.theme = nextTheme;
-    localStorage.setItem("theme", nextTheme);
-    updateThemeIcon(toggle, nextTheme);
+  const initialTheme = stored || body.dataset.theme || "dark";
+  body.dataset.theme = initialTheme;
+  radios.forEach((radio) => {
+    radio.checked = radio.value === initialTheme;
+  });
+  trackPrevious(switcher);
+  radios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      if (!radio.checked) return;
+      body.dataset.theme = radio.value;
+      localStorage.setItem("theme", radio.value);
+    });
   });
 }
 
@@ -359,33 +364,92 @@ function initHoverGlow() {
   });
 }
 
-function updateThemeIcon(toggle, theme) {
-  toggle.querySelector(".icon").textContent = theme === "dark" ? "☾" : "☀";
+function trackPrevious(el) {
+  const radios = el.querySelectorAll('input[type="radio"]');
+  let previousValue = null;
+
+  const initiallyChecked = el.querySelector('input[type="radio"]:checked');
+  if (initiallyChecked) {
+    previousValue = initiallyChecked.getAttribute("c-option");
+    el.setAttribute("c-previous", previousValue);
+  }
+
+  radios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      if (radio.checked) {
+        el.setAttribute("c-previous", previousValue ?? "");
+        previousValue = radio.getAttribute("c-option");
+      }
+    });
+  });
 }
 
 function initNavHighlight() {
   const navLinks = document.querySelectorAll(".nav-link");
+  const navSwitcher = document.querySelector(".nav-switcher");
   const mapping = new Map();
+  let currentId = null;
   navLinks.forEach((link) => {
     const id = link.getAttribute("href").replace("#", "");
     mapping.set(id, link);
   });
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const link = mapping.get(entry.target.id);
-        if (!link) return;
-        if (entry.isIntersecting) {
-          navLinks.forEach((l) => l.classList.remove("active"));
-          link.classList.add("active");
-        }
-      });
-    },
-    { root: null, threshold: 0.5 }
-  );
+  const setNavPill = (link) => {
+    if (!navSwitcher || !link) return;
+    const containerRect = navSwitcher.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const offset = Math.max(0, linkRect.left - containerRect.left - 4);
+    navSwitcher.style.setProperty("--nav-pill-x", `${offset}px`);
+    navSwitcher.style.setProperty("--nav-pill-width", `${linkRect.width}px`);
+  };
 
-  document.querySelectorAll("main section").forEach((section) => observer.observe(section));
+  const sections = Array.from(document.querySelectorAll("main section"));
+  const getActiveSection = () => {
+    const offset = 120;
+    let active = sections[0];
+    sections.forEach((section) => {
+      if (section.getBoundingClientRect().top <= offset) {
+        active = section;
+      }
+    });
+    return active;
+  };
+
+  const updateActive = () => {
+    const activeSection = getActiveSection();
+    if (!activeSection || activeSection.id === currentId) return;
+    currentId = activeSection.id;
+    if (currentId === "hero") {
+      navLinks.forEach((l) => l.classList.remove("active"));
+      if (navSwitcher) {
+        navSwitcher.classList.add("nav-switcher--hidden");
+      }
+      return;
+    }
+    const link = mapping.get(currentId);
+    if (!link) return;
+    navLinks.forEach((l) => l.classList.remove("active"));
+    link.classList.add("active");
+    setNavPill(link);
+    if (navSwitcher) {
+      navSwitcher.classList.remove("nav-switcher--hidden");
+    }
+  };
+  const initial = document.querySelector(".nav-link.active");
+  if (initial) {
+    requestAnimationFrame(() => setNavPill(initial));
+  } else if (navSwitcher) {
+    navSwitcher.classList.add("nav-switcher--hidden");
+  }
+  updateActive();
+  window.addEventListener("scroll", updateActive, { passive: true });
+  window.addEventListener("resize", () => {
+    updateActive();
+    const active = document.querySelector(".nav-link.active");
+    if (active) {
+      setNavPill(active);
+    }
+  });
 }
 
 function initSmoothScroll() {

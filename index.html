@@ -11,27 +11,51 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="images/image.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-theme="dark">
   <header class="site-header" role="banner">
-    <div class="branding">
-      <a class="logo" href="#hero">FW</a>
-      <button id="theme-toggle" type="button" class="icon-button" aria-label="Toggle dark mode">
-        <span class="icon">☾</span>
-      </button>
-    </div>
+    <div class="site-header__glass">
+      <div class="branding">
+        <a class="logo" href="#hero">FW</a>
+      </div>
     <nav class="site-nav" aria-label="Primary">
-      <ul>
-        <li><a class="nav-link" href="#about">About</a></li>
-        <li><a class="nav-link" href="#experience">Experience</a></li>
-        <li><a class="nav-link" href="#projects">Projects</a></li>
-        <li><a class="nav-link" href="#skills">Skills</a></li>
-        <li><a class="nav-link" href="#education">Education</a></li>
-        <li><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+      <ul class="nav-switcher">
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#experience">Experience</a></li>
+          <li><a class="nav-link" href="#projects">Projects</a></li>
+          <li><a class="nav-link" href="#skills">Skills</a></li>
+          <li><a class="nav-link" href="#education">Education</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <fieldset class="switcher" aria-label="Theme switcher">
+          <legend class="switcher__legend">Theme</legend>
+          <label class="switcher__option">
+            <input class="switcher__input" type="radio" name="theme" value="light" c-option="1" />
+            <span class="switcher__icon" aria-hidden="true">☼</span>
+          </label>
+          <label class="switcher__option">
+            <input class="switcher__input" type="radio" name="theme" value="dim" c-option="2" />
+            <span class="switcher__icon" aria-hidden="true">◐</span>
+          </label>
+          <label class="switcher__option">
+            <input class="switcher__input" type="radio" name="theme" value="dark" c-option="3" checked />
+            <span class="switcher__icon" aria-hidden="true">☾</span>
+          </label>
+          <svg class="switcher__filter" aria-hidden="true">
+            <filter id="switcher">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise" />
+              <feColorMatrix type="saturate" values="0" />
+              <feComposite in="SourceGraphic" in2="noise" operator="in" />
+            </filter>
+          </svg>
+        </fieldset>
+      </div>
+    </div>
   </header>
 
   <main>
