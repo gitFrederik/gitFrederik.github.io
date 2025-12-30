@@ -2,7 +2,7 @@ const content = {
   hero: {
     name: "Frederik Willemsen",
     headline: "AI Software Engineer · Computer Science Student",
-    value: "Machine-learning specialist turning analytical research into shipping software with measurable impact on latency, automation, and insight workflows.",
+    value: "Engineer with a strong analytical mindset, building scalable AI and backend systems, breaking down complex problems and translating technical insights into measurable business impact.",
     location: "Munich area",
     ctas: {
       primary: { label: "View Projects", href: "#projects" },
@@ -14,7 +14,7 @@ const content = {
     ]
   },
   about: {
-    bio: "Currently pursuing my M.Sc. in Computer Science at TUM while focusing on AI-heavy consulting and engineering work. I care about data-rigorous decisions, pragmatic tooling, and keeping ML systems transparent enough for cross-functional partners to trust.",
+    bio: "M.Sc. Computer Science student at TUM, focused on AI-heavy engineering and consulting work. I emphasize data-rigorous decision making, pragmatic tooling, and building transparent ML systems that cross-functional partners can trust.",
     interests: ["Data-driven consulting", "ML systems", "Rapid prototyping", "Hackathons", "Student leadership", "AI"]
   },
   experience: [
@@ -33,12 +33,29 @@ const content = {
       role: "Software Engineer Intern",
       company: "CHECK24",
       timeframe: "Aug 2025 – Oct 2025",
-      bullets: [
-        "Designed and deployed an MCP server for structured LLM context that cut API latency by 50% via smart caching",
-        "Implemented an AI-powered natural-language filter supporting intuitive free-text search and auto-tagging",
-        "Shipped production-grade monitoring and automation around ML features to keep operating costs low"
+      projects: [
+        {
+          title: "Project 1: LLM Context MCP-Server (Backend)",
+          bullets: [
+            "Owned the end-to-end design, development, and production rollout of an MCP server powering structured, on-demand LLM context for a consumer platform with 15M+ customers",
+            "Redesigned context delivery by replacing a monolithic Confluence-based prompt with modular, on-demand context loading, reducing API latency by ~50% and significantly lowering inference costs",
+            "Evaluated architectural trade-offs (context size vs. latency vs. cost) and implemented caching, monitoring, and automation to ensure scalable and cost-efficient ML operations in production"
+          ]
+        },
+        {
+          title: "Project 2: AI-Powered Natural Language Filter (Full Stack)",
+          link: {
+            label: "Live website",
+            url: "https://geldanlage.check24.de/vergleich/ergebnis/47xw-ccff?type=CALL_MONEY"
+          },
+          bullets: [
+            "Designed and built a full-stack AI-driven filter enabling intuitive free-text search and auto-tagging directly on the live website",
+            "Improved user interaction and content discoverability by translating ambiguous natural-language queries into structured signals consumed by backend services",
+            "Deployed and monitored the feature in production, ensuring performance, reliability, and usability at scale"
+          ]
+        }
       ],
-      stack: ["Java", "Spring Boot", "React", "Python"]
+      stack: ["Java", "Spring Boot", "Python", "React"]
     }
   ],
   projects: [
@@ -172,11 +189,49 @@ function hydrateExperience() {
   content.experience.forEach((role) => {
     const card = document.createElement("article");
     card.className = "card";
+    const bullets = role.bullets
+      ? `<ul>${role.bullets.map((item) => `<li>${item}</li>`).join("")}</ul>`
+      : "";
+    const projects = role.projects
+      ? `
+          <div class="project-list">
+            ${role.projects
+              .map(
+                (project) => `
+                  <div class="project-block">
+                    <button class="toggle-project" type="button" aria-expanded="false">
+                      ${project.title}
+                    </button>
+                    ${
+                      project.link
+                        ? `<a class="project-link" href="${project.link.url}" target="_blank" rel="noopener noreferrer">${project.link.label} ↗</a>`
+                        : ""
+                    }
+                    <ul class="project-details" hidden>
+                      ${project.bullets.map((item) => `<li>${item}</li>`).join("")}
+                    </ul>
+                  </div>
+                `
+              )
+              .join("")}
+          </div>
+        `
+      : "";
     card.innerHTML = `
       <h3>${role.role} · ${role.company}</h3>
       <p>${role.timeframe}</p>
-      <ul>${role.bullets.map((item) => `<li>${item}</li>`).join("")}</ul>
+      ${bullets || projects}
     `;
+    card.querySelectorAll(".toggle-project").forEach((toggle) => {
+      const details = toggle.parentElement.querySelector(".project-details");
+      toggle.addEventListener("click", () => {
+        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!isExpanded));
+        if (details) {
+          details.hidden = isExpanded;
+        }
+      });
+    });
     card.appendChild(renderStack(role.stack));
     wrapper.appendChild(card);
   });

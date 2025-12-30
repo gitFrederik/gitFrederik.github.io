@@ -295,6 +295,56 @@ main {
   color: var(--muted);
 }
 
+.project-list {
+  margin-top: 0.25rem;
+}
+
+.project-block + .project-block {
+  margin-top: 0.75rem;
+}
+
+.toggle-project {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.project-link {
+  display: inline-flex;
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.project-link:hover {
+  color: var(--text);
+}
+
+.toggle-project::after {
+  content: "▾";
+  font-size: 0.8rem;
+  color: var(--muted);
+  transition: transform 0.2s ease;
+}
+
+.toggle-project[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.project-details {
+  margin: 0.35rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--text);
+}
+
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
