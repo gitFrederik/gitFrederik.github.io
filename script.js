@@ -1,7 +1,7 @@
 const content = {
   hero: {
-    name: "Frederik Maximilian Willemsen",
-    headline: "AI & Data Project Intern · Software Engineer",
+    name: "Frederik Willemsen",
+    headline: "AI Software Engineer · Computer Science Student",
     value: "Machine-learning specialist turning analytical research into shipping software with measurable impact on latency, automation, and insight workflows.",
     location: "Munich area",
     ctas: {
@@ -15,7 +15,7 @@ const content = {
   },
   about: {
     bio: "Currently pursuing my M.Sc. in Computer Science at TUM while focusing on AI-heavy consulting and engineering work. I care about data-rigorous decisions, pragmatic tooling, and keeping ML systems transparent enough for cross-functional partners to trust.",
-    interests: ["Data-driven consulting", "ML systems", "Rapid prototyping", "Hackathons", "Student leadership"]
+    interests: ["Data-driven consulting", "ML systems", "Rapid prototyping", "Hackathons", "Student leadership", "AI"]
   },
   experience: [
     {
