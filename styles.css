@@ -268,6 +268,42 @@ main {
   box-shadow: var(--shadow);
 }
 
+:is(.card, .skill-group) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  --glow-opacity: 0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+:is(.card, .skill-group) > * {
+  position: relative;
+  z-index: 1;
+}
+
+:is(.card, .skill-group)::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(88, 213, 255, 0.35),
+    transparent 60%
+  );
+  opacity: var(--glow-opacity, 0);
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+:is(.card, .skill-group):hover,
+:is(.card, .skill-group):focus-within {
+  transform: translateY(-6px);
+  border-color: rgba(88, 213, 255, 0.45);
+  box-shadow: 0 22px 45px rgba(2, 6, 23, 0.45);
+  background: linear-gradient(180deg, rgba(88, 213, 255, 0.08), transparent 45%), var(--surface);
+}
+
 .card.featured {
   border-color: var(--accent);
   position: relative;

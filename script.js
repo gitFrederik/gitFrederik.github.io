@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initNavHighlight();
   initSmoothScroll();
+  initHoverGlow();
   document.getElementById("year").textContent = new Date().getFullYear();
 });
 
@@ -334,6 +335,27 @@ function initThemeToggle() {
     body.dataset.theme = nextTheme;
     localStorage.setItem("theme", nextTheme);
     updateThemeIcon(toggle, nextTheme);
+  });
+}
+
+function initHoverGlow() {
+  const tiles = document.querySelectorAll(".card, .skill-group");
+  tiles.forEach((tile) => {
+    tile.style.setProperty("--glow-x", "50%");
+    tile.style.setProperty("--glow-y", "50%");
+    tile.addEventListener("pointermove", (event) => {
+      const rect = tile.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      tile.style.setProperty("--glow-x", `${x}%`);
+      tile.style.setProperty("--glow-y", `${y}%`);
+      tile.style.setProperty("--glow-opacity", "1");
+    });
+    tile.addEventListener("pointerleave", () => {
+      tile.style.setProperty("--glow-opacity", "0");
+      tile.style.setProperty("--glow-x", "50%");
+      tile.style.setProperty("--glow-y", "50%");
+    });
   });
 }
 
