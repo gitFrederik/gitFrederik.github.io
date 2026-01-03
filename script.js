@@ -398,9 +398,10 @@ function initNavHighlight() {
     if (!navSwitcher || !link) return;
     const containerRect = navSwitcher.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
-    const offset = Math.max(0, linkRect.left - containerRect.left - 4);
+    const inset = 6;
+    const offset = Math.max(0, Math.round(linkRect.left - containerRect.left - inset));
     navSwitcher.style.setProperty("--nav-pill-x", `${offset}px`);
-    navSwitcher.style.setProperty("--nav-pill-width", `${linkRect.width}px`);
+    navSwitcher.style.setProperty("--nav-pill-width", `${Math.round(linkRect.width)}px`);
   };
 
   const sections = Array.from(document.querySelectorAll("main section"));
