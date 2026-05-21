@@ -52,7 +52,7 @@ export default function ExperiencePage() {
                 <li>
                   <div className="metric">400+<small>members</small></div>
                   <div className="text">
-                    <strong>Member management platform.</strong> Centralizing operations across the organization — application review, project assignment, alumni records — into one system. Replacing six disconnected spreadsheets and three Notion bases.
+                    <strong>Member management platform.</strong> <span className="tag tag--wip">in progress</span> Centralizing operations across the organization — application review, project assignment, alumni records — into one system. Replacing six disconnected spreadsheets and three Notion bases.
                     <div className="tags">
                       <span className="tag">TypeScript</span>
                       <span className="tag">Next.js</span>
@@ -63,7 +63,7 @@ export default function ExperiencePage() {
                 <li>
                   <div className="metric">∞<small>hours saved</small></div>
                   <div className="text">
-                    <strong>Finance automation.</strong> Eliminating recurring manual overhead — reimbursements, sponsor invoicing, budget rollups — by codifying the board&apos;s monthly workflow into a small, auditable pipeline.
+                    <strong>Finance automation.</strong> <span className="tag tag--wip">in progress</span> Eliminating recurring manual overhead — reimbursements, sponsor invoicing, budget rollups — by codifying the board&apos;s monthly workflow into a small, auditable pipeline.
                     <div className="tags">
                       <span className="tag">Python</span>
                       <span className="tag">FastAPI</span>
